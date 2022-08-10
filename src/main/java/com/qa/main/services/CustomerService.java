@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.qa.main.domain.Customer;
+import com.qa.main.exceptions.CustomerNotFoundException;
 import com.qa.main.repos.CustomerRepo;
 
 @Service
@@ -24,7 +25,15 @@ public class CustomerService {
 	}
 	
 	public Customer getByID(long id) {
-		return repo.findById(id).get();
+		return repo.findById(id).orElseThrow(CustomerNotFoundException::new);
+	}
+	
+	public List<Customer> getByFirstName(String firstName) {
+		return repo.findCustomerByFirstName(firstName);
+	}
+	
+	public List<Customer> getByLastName(String lastName) {
+		return repo.getByLastName(lastName);
 	}
 	
 	public Customer update(long id, Customer customer) {
