@@ -58,6 +58,8 @@ public class CustomerControllerIntegrationTest {
 		// Convert the list to JSON (The API responds in JSON)
 		String resultAsJSON = mapper.writeValueAsString(result);
 		
+		
+		
 		mvc.perform(get("/customer/getAll")
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(content().json(resultAsJSON));
